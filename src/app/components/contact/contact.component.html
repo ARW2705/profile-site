@@ -1,0 +1,112 @@
+<div class="container" fxLayout="column">
+
+  <app-header></app-header>
+
+  <div class="content"
+       fxFlex="grow"
+       fxLayout="row"
+       fxLayoutAlign="center center"
+       [@fadeInOut]>
+
+    <!-- Add another download link for CV -->
+    <!-- Add linkedin and github extra links -->
+    <mat-card id="contact-form-card"
+              fxFlex="60"
+              fxFlex.lt-sm="90"
+              fxFlex.lt-md="70">
+      <mat-card-header fxLayoutAlign="center">
+        <mat-card-title id="contact-form-title">
+          Let's get in touch!
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="column">
+        <form id="email-form"
+              (ngSubmit)="onSubmit()"
+              [formGroup]="emailForm"
+              novalidate
+              fxFlex="grow"
+              fxLayout="column"
+              fxLayoutAlign="center center">
+          <mat-form-field class="contact-form-field">
+            <input matInput
+                   placeholder="First name"
+                   formControlName="firstName"
+                   type="text"
+                   required>
+            <mat-error *ngIf="formErrors.firstName">
+              {{ formErrors.firstName }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="contact-form-field">
+            <input matInput
+                   placeholder="Last name"
+                   formControlName="lastName"
+                   type="text"
+                   required>
+            <mat-error *ngIf="formErrors.lastName">
+              {{ formErrors.lastName }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="contact-form-field">
+            <input matInput
+                   placeholder="Your Email"
+                   formControlName="contactEmail"
+                   type="email"
+                   required>
+            <mat-error *ngIf="formErrors.contactEmail">
+              {{ formErrors.contactEmail }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="contact-form-field">
+            <textarea matInput
+                      rows="4"
+                      placeholder="Enter your message here"
+                      formControlName="message"
+                      required>
+            </textarea>
+            <mat-error *ngIf="formErrors.message">
+              {{ formErrors.message }}
+            </mat-error>
+          </mat-form-field>
+
+          <re-captcha [hidden]="errMsg" formControlName="recaptcha"></re-captcha>
+
+          <button mat-raised-button
+                  color="primary"
+                  id="submit-btn"
+                  *ngIf="!errMsg"
+                  [disabled]="emailForm.invalid"
+                  [innerHTML]="submitStatus">
+          </button>
+        </form>
+
+        <div id="error-message"
+             *ngIf="errMsg"
+             fxLayout="column">
+          <!-- TODO format error message -->
+          <p>{{ errMsg }}</p>
+          <div fxLayout="row"
+               fxLayoutAlign="space-around">
+            <button mat-raised-button
+                    id="error-reset-btn"
+                    (click)="resetForm()">
+              Reset Form
+            </button>
+            <button mat-raised-button
+                    id="error-reset-btn"
+                    (click)="onSubmit()">
+              Try Again
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <app-footer></app-footer>
+
+</div>

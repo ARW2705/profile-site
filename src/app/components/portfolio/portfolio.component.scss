@@ -1,0 +1,60 @@
+@import "~src/theme.scss";
+
+.project-card {
+  margin: 10px 0;
+  border-radius: 15px;
+  box-shadow: 3px 5px rgba(0, 0, 0, 0.1),
+    1px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.project-card-header {
+  border-bottom: 1px solid gray;
+  margin-bottom: 5px;
+  .mat-card-title {
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+  .mat-card-subtitle {
+    font-size: 1em;
+    font-weight: 400;
+  }
+}
+
+.project-card-preview-image {
+  width: 100%;
+  margin: 0 auto 5px;
+  height: 250px;
+}
+
+.project-description {
+  padding: 0 15px;
+}
+
+.project-tech {
+  padding-inline-start: 20px !important;
+}
+
+.project-tech-icon {
+  width: 48px;
+  height: 48px;
+  padding: 0 5px;
+}
+
+#clear-btn-container {
+  margin: 10px 0;
+  button {
+    padding-top: 4px;
+    padding-bottom: 4px; 
+    font-size: 2em;
+  }
+  button:hover {
+    color: $primary-color-dark;
+    background-color: $secondary-color;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .project-card {
+    margin: 10px;
+  }
+}

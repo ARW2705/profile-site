@@ -1,0 +1,52 @@
+<div class="container" fxLayout="column">
+
+  <app-header></app-header>
+
+  <div class="content"
+       fxFlex="grow"
+       fxLayout="row wrap"
+       fxLayout.lt-sm="column"
+       fxLayoutAlign="space-around"
+       [@fadeInOut]>
+
+      <mat-card class="project-card"
+                fxLayout="column"
+                fxFlex="30"
+                fxFlex.lt-md="45"
+                fxFlex.lt-sm="90"
+                *ngFor="let project of projects">
+        <mat-card-header class="project-card-header">
+          <mat-card-title>{{ project.title }}</mat-card-title>
+          <mat-card-subtitle>{{ project.category | stringArray }}</mat-card-subtitle>
+        </mat-card-header>
+        <img class="project-card-preview-image" src="{{ url + 'images/' + project.preview.src }}" alt="project.preview.alt">
+        <mat-card-content fxFlex="grow" class="project-card-content">
+          <p class="project-description">
+            {{ project.description }}
+          </p>
+        </mat-card-content>
+        <mat-card-footer class="project-card-footer">
+          <ul class="project-tech"
+              fxLayout="row"
+              fxLayoutAlign="start start">
+            <li class="project-tech-icon"
+              *ngFor="let tech of project.technology">
+              <a (click)="filterProjectsByTechnology(tech)"
+                 [inlineSVG]="'assets/svg/tech-icons/' + tech + '.svg'">
+               </a>
+            </li>
+          </ul>
+        </mat-card-footer>
+      </mat-card>
+
+  </div>
+
+  <div fxLayoutAlign="center center" id="clear-btn-container" *ngIf="projects.length != projectList.length">
+    <button color="primary" mat-raised-button (click)="resetProjects()">
+      Clear Fitler
+    </button>
+  </div>
+
+  <app-footer></app-footer>
+
+</div>

@@ -1,0 +1,29 @@
+<div class="container" fxLayout="column">
+
+  <app-header></app-header>
+
+  <div class="carousel"
+       fxFlex="grow"
+       fxLayout="column"
+       fxLayoutAlign="center center"
+       [@fadeInOut]>
+    <figure [ngStyle]="figureStyle">
+      <a *ngFor="let page of pages; index as i"
+         [ngStyle]="anchorStyle[i]"
+         (click)="onCarouselNavigate(i)"
+         fxLayout="column">
+        <img [src]="page.thumbnail" [alt]="page.alt">
+        <figcaption [innerHTML]="page.text" [ngStyle]="captionStyle[i]"></figcaption>
+      </a>
+    </figure>
+    <div class="carousel-button-bar"
+         fxLayout="row"
+         fxLayoutAlign="space-around center">
+      <button (click)="rotateCarousel('prev', true)">Prev</button>
+      <button (click)="rotateCarousel('next', true)">Next</button>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+
+</div>

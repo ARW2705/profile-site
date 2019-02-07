@@ -1,0 +1,41 @@
+@import "~src/theme.scss";
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  min-width: $min-width;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(rgba(22, 27, 43, 0.9), rgba(183, 193, 122, 0.7));
+}
+
+a,
+a:visited {
+  color: $light-gray;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $secondary-color;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+.btn-icon-only {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.container {
+  min-height: 100vh;
+}

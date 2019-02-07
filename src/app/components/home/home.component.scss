@@ -1,0 +1,112 @@
+@import "~src/theme.scss";
+
+$item-width-xs: 100%;
+$item-width-sm: 90%;
+$item-width-md: 80%;
+$item-width-lg: 70%;
+$viewer-distance: 800px;
+
+.carousel {
+  perspective: $viewer-distance;
+  > * {
+    flex: 0 0 auto;
+  }
+
+  figure {
+    margin: 0;
+    width: $item-width-lg;
+    transform-style: preserve-3d;
+    transition: transform 1.5s;
+    position: relative;
+
+    a {
+      display: block;
+
+      &:not(:first-of-type) {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    img {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    figcaption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      font-size: 10vw;
+      font-weight: 500;
+      text-decoration: none;
+      text-shadow: 2px 2px 3px rgba(120, 120, 120, 0.5),
+        2px 2px rgba(90, 90, 90, 0.6);
+    }
+  }
+
+}
+
+.carousel-button-bar {
+  width: 50%;
+  padding-top: 20px;
+
+  button {
+    cursor: pointer;
+    min-height: 48px;
+    height: 100%;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid black;
+    padding: 2% 4%;
+    letter-spacing: 1px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .carousel {
+    figure {
+      width: $item-width-xs;
+    }
+  }
+}
+
+@media screen and (min-width: 599px) and (max-width: 859px) {
+  .carousel {
+    figure {
+      width: $item-width-sm;
+
+      figcaption {
+        font-size: 7.5vw;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 859px) and (max-width: 999px){
+  .carousel {
+    figure {
+      width: $item-width-md;
+
+      figcaption {
+        font-size: 6vw;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .carousel {
+    figure {
+      width: $item-width-lg;
+
+      figcaption {
+        font-size: 5vw;
+      }
+    }
+  }
+}

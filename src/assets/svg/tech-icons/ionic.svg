@@ -1,0 +1,6 @@
+<svg viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="58" stroke="#478aff" stroke-width="10" fill="transparent"/>
+  <circle cx="106" cy="22" r="18" style="fill:white"/>
+  <circle cx="106" cy="22" r="12" style="fill:#478aff"/>
+  <circle cx="64" cy="64" r="30" style="fill:#478aff"/>
+</svg>
