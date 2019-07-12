@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularPageVisibilityModule } from 'angular-page-visibility';
 
 import {
   MatCardModule,
@@ -25,8 +26,6 @@ import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import { RoutingModule } from './routing/routing.module';
 
@@ -75,7 +74,8 @@ import { ProcessHttpErrorService } from './services/process-http-error.service';
     FlexLayoutModule,
     FormsModule,
     InlineSVGModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularPageVisibilityModule
   ],
   providers: [
     ProjectDataService,
@@ -92,7 +92,5 @@ import { ProcessHttpErrorService } from './services/process-http-error.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
-    library.add(faAngleLeft, faAngleRight);
-  }
+  constructor() { }
 }
