@@ -19,8 +19,10 @@
           <mat-card-title>{{ project.title }}</mat-card-title>
           <mat-card-subtitle>{{ project.category | stringArray }}</mat-card-subtitle>
         </mat-card-header>
-        <img class="project-card-preview-image" src="{{ url + 'images/' + project.preview.src }}" alt="project.preview.alt">
         <mat-card-content fxFlex="grow" class="project-card-content">
+          <a href="{{ project.github }}" target="blank">
+            <img class="project-card-preview-image" src="{{ url + 'images/' + project.preview.src }}" alt="{{ project.preview.alt }}">
+          </a>
           <p class="project-description">
             {{ project.description }}
           </p>
