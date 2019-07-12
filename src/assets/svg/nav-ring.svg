@@ -1,0 +1,43 @@
+<svg  id="nav-ring"
+      viewBox="0 0 500 500">
+  <mask id="nav-ring-mask">
+
+    <rect x="0"
+          y="0"
+          width="500"
+          height="500"
+          fill="gray"/>
+
+    <ellipse  cx="250"
+              cy="90"
+              rx="160"
+              ry="65"
+              fill="black"/>
+
+    <polyline points="250,160 250,178"
+              stroke="black"
+              stroke-width="3"
+              stroke-linecap="round"/>
+
+    <path d="M 235,172 A 235,172 0,0,1 180,165 A 180,165 0,0,1 190,162"
+          stroke="black"
+          stroke-width="4"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <path d="M 265,172 A 265,172 0,0,0 320,165 A 320,165 0,0,0 310,162"
+          stroke="black"
+          stroke-width="4"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </mask>
+
+  <ellipse  cx="250"
+            cy="100"
+            rx="170"
+            ry="80"
+            mask="url(#nav-ring-mask)"/>
+
+</svg>
