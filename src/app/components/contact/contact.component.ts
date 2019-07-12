@@ -82,10 +82,12 @@ export class ContactComponent implements OnInit {
     newEmail.timestamp = new Date().toString();
     this.emailService.submitEmail(newEmail)
       .subscribe(submissionResponse => {
-        this.resetForm('Sent!');
-        setTimeout(() => {
-          this.submitStatus = 'Submit';
-        }, 3000)
+        if (submissionResponse.statusCode = 200) {
+          this.resetForm('Sent!');
+          setTimeout(() => {
+            this.submitStatus = 'Submit';
+          }, 3000);
+        }
       }, error => this.errMsg = error);
   }
 
