@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { OnPageVisible, OnPageHidden } from 'angular-page-visibility';
 
 import { fadeInOut } from '../animations/routing-animations';
 
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       title: 'Intro', route: '/home', thumbnail: 'assets/images/intro-4.png',
       alt: 'Abstract line waves', textColor: 'light',
-      text: 'Hi,<br> I\'m Andrew,<br> web developer.'
+      text: 'Hi,<br> I\'m Andrew,<br>a web developer'
     }, {
       title: 'Contact', route: '/contact', thumbnail: 'assets/images/contact.jpg',
       alt: 'desk with laptop', textColor: 'dark',
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       text: 'My Projects'
     }
   ];
+  @ViewChild('carouselRingButton') carouselRingButton: ElementRef;
   carouselRotateInterval = null;
   imageRatios = [1, 0.8, 0.7];
   imageWidth: number;
@@ -59,11 +61,22 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   anchorStyle: CarouselStyle[] = [{}, {}, {}, {}];
   captionStyle: CarouselStyle[] = [{}, {}, {}, {}];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    public cdRef: ChangeDetectorRef) { }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.setImageRatio();
+    this.setImageRatio(true);
+  }
+
+  @OnPageVisible()
+  onPageVisible(): void {
+    this.startAutoRotate();
+  }
+
+  @OnPageHidden()
+  onPageHidden(): void {
+    this.stopAutoRotate(true);
   }
 
   ngOnInit() {
@@ -80,13 +93,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   startAutoRotate() {
     this.figureStyle.transition = this.autoTiming;
-    this.carouselRotateInterval = setInterval(() => {
-      this.rotateCarousel('next');
-    }, 7000);
+    if (this.carouselRotateInterval == null) {
+      this.carouselRotateInterval = setInterval(() => {
+        this.rotateCarousel('next');
+      }, 7000);
+    }
   }
 
   stopAutoRotate(onLeave?: boolean) {
     clearInterval(this.carouselRotateInterval);
+    this.carouselRotateInterval = null;
     if (!onLeave) {
       this.figureStyle.transition = this.manualTiming;
       if (this.pauseAutoTimer == null) {
@@ -96,6 +112,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 20000);
       }
     }
+  }
+
+  rotateCarouselOnClick(event: any) {
+    const rect = this.carouselRingButton.nativeElement.getBoundingClientRect();
+    this.rotateCarousel(event.clientX < (rect.left + rect.width / 2) ? 'prev': 'next', true);
   }
 
   rotateCarousel(direction: string, stopAutoRotate?: boolean) {
@@ -109,6 +130,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     // TODO - use angular animations?
     this.figureStyle.transform = `rotateY(${this.currentImage * -this.theta}rad)`;
+    this.cdRef.detectChanges();
   }
 
   onCarouselNavigate(index: number) {
@@ -128,14 +150,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  setImageRatio() {
+  setImageRatio(resize?: boolean) {
     const innerWidth = window.innerWidth;
     this.imageWidth = innerWidth * this.imageRatios[(innerWidth < 599) ? 0: (innerWidth < 1199) ? 1: 2];
     this.apothem = this.imageWidth / (2 * Math.tan(Math.PI / this.pages.length));
-    this.figureStyle = {
-      transformOrigin: `50% 50% ${-this.apothem}px`,
-      transform: 'rotateY(0rad)'
-    };
+    this.figureStyle['transformOrigin'] = `50% 50% ${-this.apothem}px`;
+    if (!resize) {
+      this.figureStyle['transform'] = 'rotateY(0rad)';
+    }
 
     for (let i=0; i < this.pages.length; i++) {
       const width = this.gapRatio * innerWidth;

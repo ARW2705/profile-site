@@ -10,18 +10,71 @@
     <figure [ngStyle]="figureStyle">
       <a *ngFor="let page of pages; index as i"
          [ngStyle]="anchorStyle[i]"
-         (click)="onCarouselNavigate(i)"
-         fxLayout="column">
+         (click)="onCarouselNavigate(i)">
         <img [src]="page.thumbnail" [alt]="page.alt">
         <figcaption [innerHTML]="page.text" [ngStyle]="captionStyle[i]"></figcaption>
       </a>
     </figure>
-    <div class="carousel-button-bar"
-         fxLayout="row"
-         fxLayoutAlign="space-around center">
-      <button (click)="rotateCarousel('prev', true)">Prev</button>
-      <button (click)="rotateCarousel('next', true)">Next</button>
-    </div>
+    <button id="carousel-ring-button"
+            #carouselRingButton
+            (click)="rotateCarouselOnClick($event)">
+      <svg  id="carousel-ring"
+            viewBox="0 0 370 120">
+
+        <defs>
+          <radialGradient id="gradient">
+            <stop offset="0%" style="stop-color: rgba(246,246,255); stop-opacity: 1"/>
+            <stop offset="50%" style="stop-color: rgba(120,120,120); stop-opacity: 1"/>
+            <stop offset="100%" style="stop-color: rgba(246,246,255); stop-opacity: 1"/>
+          </radialGradient>
+        </defs>
+
+        <mask id="carousel-ring-mask">
+
+          <rect x="0"
+                y="0"
+                width="370"
+                height="120"
+                fill="white"/>
+
+          <ellipse  cx="185"
+                    cy="50"
+                    rx="160"
+                    ry="40"
+                    fill="black"/>
+
+        </mask>
+
+        <ellipse  cx="185"
+                  cy="60"
+                  rx="180"
+                  ry="55"
+                  fill="url(#gradient)"
+                  mask="url(#carousel-ring-mask)"/>
+
+        <line x1="185"
+              y1="95"
+              x2="185"
+              y2="113"
+              stroke="rgb(140, 140, 140)"
+              stroke-width="3"
+              stroke-linecap="round"/>
+
+        <path d="M 170,110 A 170,110 0,0,1 115,105 A 115,145 0,0,0 125,100"
+              stroke="rgb(160, 160, 160)"
+              stroke-width="3"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+
+        <path d="M 200,110 A 200,110 0,0,0 255,105 A 255,145 0,0,0 245,100"
+              stroke="rgb(160, 160, 160)"
+              stroke-width="3"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+      </svg>
+    </button>
   </div>
 
   <app-footer></app-footer>

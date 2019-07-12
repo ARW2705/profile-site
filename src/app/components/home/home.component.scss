@@ -13,7 +13,8 @@ $viewer-distance: 800px;
   }
 
   figure {
-    margin: 0;
+    margin: 0 0 5%;
+    z-index: 10;
     width: $item-width-lg;
     transform-style: preserve-3d;
     transition: transform 1.5s;
@@ -51,20 +52,25 @@ $viewer-distance: 800px;
 
 }
 
-.carousel-button-bar {
-  width: 50%;
-  padding-top: 20px;
+#carousel-ring-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 70%;
+  height: 45%;
+  padding: 0;
+}
 
-  button {
-    cursor: pointer;
-    min-height: 48px;
-    height: 100%;
-    color: #333;
-    background-color: #fff;
-    border: 1px solid black;
-    padding: 2% 4%;
-    letter-spacing: 1px;
-  }
+#carousel-ring-button:focus {
+  outline: none;
+}
+
+.carousel-button-bar {
+  width: 80%;
+  padding-top: 20px;
 }
 
 @media screen and (max-width: 599px) {
@@ -85,6 +91,9 @@ $viewer-distance: 800px;
       }
     }
   }
+  #carousel-ring-button {
+    height: 45%;
+  }
 }
 
 @media screen and (min-width: 859px) and (max-width: 999px){
@@ -97,9 +106,12 @@ $viewer-distance: 800px;
       }
     }
   }
+  #carousel-ring-button {
+    height: 50%;
+  }
 }
 
-@media screen and (min-width: 999px) {
+@media screen and (min-width: 999px) and (max-width: 1400px) {
   .carousel {
     figure {
       width: $item-width-lg;
@@ -108,5 +120,44 @@ $viewer-distance: 800px;
         font-size: 5vw;
       }
     }
+  }
+  #carousel-ring-button {
+    height: 55%;
+  }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1800px) {
+  .carousel {
+    figure {
+      width: 65%;
+
+      figcaption {
+        font-size: 4.5vw;
+      }
+    }
+  }
+  #carousel-ring-button {
+    height: 60%
+  }
+}
+@media screen and (min-width: 1600px) and (max-width: 1800px) {
+  #carousel-ring-button {
+    height: 90%;
+  }
+}
+
+
+@media screen and (min-width: 1800px) {
+  .carousel {
+    figure {
+      width: 60%;
+
+      figcaption {
+        font-size: 4vw;
+      }
+    }
+  }
+  #carousel-ring-button {
+    height: 65%;
   }
 }
