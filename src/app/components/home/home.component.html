@@ -8,16 +8,18 @@
        fxLayoutAlign="center center"
        [@fadeInOut]>
     <figure [ngStyle]="figureStyle">
-      <a *ngFor="let page of pages; index as i"
-         [ngStyle]="anchorStyle[i]"
-         (click)="onCarouselNavigate(i)">
+      <a  *ngFor="let page of pages; index as i"
+          [ngStyle]="anchorStyle[i]"
+          (click)="onCarouselNavigate(i)"
+          [attr.aria-label]="page.helpText">
         <img [src]="page.thumbnail" [alt]="page.alt">
         <figcaption [innerHTML]="page.text" [ngStyle]="captionStyle[i]"></figcaption>
       </a>
     </figure>
     <button id="carousel-ring-button"
             #carouselRingButton
-            (click)="rotateCarouselOnClick($event)">
+            (click)="rotateCarouselOnClick($event)"
+            aria-label="rotate carousel">
       <svg  id="carousel-ring"
             viewBox="0 0 370 120">
 
