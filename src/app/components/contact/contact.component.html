@@ -8,8 +8,7 @@
        fxLayoutAlign="center center"
        [@fadeInOut]>
 
-    <!-- Add another download link for CV -->
-    <!-- Add linkedin and github extra links -->
+    <!-- TODO: Add linkedin and github extra links -->
     <mat-card id="contact-form-card"
               fxFlex="60"
               fxFlex.lt-sm="90"
@@ -27,7 +26,8 @@
               fxFlex="grow"
               fxLayout="column"
               fxLayoutAlign="center center">
-          <mat-form-field class="contact-form-field">
+          <mat-form-field class="contact-form-field"
+                          aria-label="First name">
             <input matInput
                    placeholder="First name"
                    formControlName="firstName"
@@ -38,7 +38,8 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="contact-form-field">
+          <mat-form-field class="contact-form-field"
+                          aria-label="Last name">
             <input matInput
                    placeholder="Last name"
                    formControlName="lastName"
@@ -49,7 +50,8 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="contact-form-field">
+          <mat-form-field class="contact-form-field"
+                          aria-label="Email">
             <input matInput
                    placeholder="Your Email"
                    formControlName="contactEmail"
@@ -60,7 +62,8 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="contact-form-field">
+          <mat-form-field class="contact-form-field"
+                          aria-label="Message text area">
             <textarea matInput
                       rows="4"
                       placeholder="Enter your message here"
@@ -72,14 +75,24 @@
             </mat-error>
           </mat-form-field>
 
-          <re-captcha [hidden]="errMsg" formControlName="recaptcha"></re-captcha>
+          <div fxLayout="column">
+            <a  id="download-resume-link"
+                color="accent"
+                [attr.href]="resumeURL"
+                download
+                fxFlex="50">
+              Download my résumé!
+            </a>
+            <re-captcha [hidden]="errMsg" formControlName="recaptcha"></re-captcha>
+          </div>
 
           <button mat-raised-button
                   color="primary"
                   id="submit-btn"
                   *ngIf="!errMsg"
                   [disabled]="emailForm.invalid"
-                  [innerHTML]="submitStatus">
+                  [innerHTML]="submitStatus"
+                  aria-label="submit form">
           </button>
         </form>
 

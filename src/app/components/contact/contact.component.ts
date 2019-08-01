@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { fadeInOut } from '../animations/routing-animations';
 
@@ -13,7 +14,7 @@ import { EmailRequestService } from '../../services/email-request.service';
     fadeInOut()
   ]
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
 
   emailForm: FormGroup;
   formErrors = {
@@ -43,24 +44,38 @@ export class ContactComponent implements OnInit {
   };
   errMsg = '';
   submitStatus = 'Submit';
+  resumeURL = 'assets/pdf/Andrew-Wanex-resume.pdf';
+  formSubscription: Subscription;
 
   constructor(private formBuilder: FormBuilder,
     private emailService: EmailRequestService) {
-    this.emailForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      contactEmail: ['', [Validators.required, Validators.email]],
-      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(240)]],
-      recaptcha: ['', [Validators.required]]
-    });
-    this.emailForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      this.emailForm = this.formBuilder.group({
+        firstName: ['', [Validators.required, Validators.minLength(2)]],
+        lastName: ['', [Validators.required, Validators.minLength(2)]],
+        contactEmail: ['', [Validators.required, Validators.email]],
+        message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(240)]],
+        recaptcha: ['', [Validators.required]]
+      });
+  }
+
+  ngOnInit() {
+    this.formSubscription = this.emailForm.valueChanges
+      .subscribe(_ => this.onValueChanged());
     this.onValueChanged();
   }
 
-  ngOnInit() { }
+  ngOnDestroy() {
+    this.formSubscription.unsubscribe();
+  }
 
-  onValueChanged(data?: any) {
+  /**
+   * Check form validation on changes and add any error messages to display
+   *
+   * @params: none
+   *
+   * @return: none
+  **/
+  onValueChanged(): void {
     if (!this.emailForm) return;
 
     const form = this.emailForm;
@@ -76,6 +91,14 @@ export class ContactComponent implements OnInit {
     }
   }
 
+  /**
+   * Submit form and call emailService submitEmail, clear the form on successful
+   * http request, display error if response is not 200
+   *
+   * @params: none
+   *
+   * @return: none
+  **/
   onSubmit() {
     this.submitStatus = 'Sending...';
     const newEmail = this.emailForm.value;
@@ -91,6 +114,14 @@ export class ContactComponent implements OnInit {
       }, error => this.errMsg = error);
   }
 
+  /**
+   * Clear form fields and error messages
+   *
+   * @params: [status] - defaults to 'Submit', set to 'Sent!' if email was
+   * successfully sent
+   *
+   * @return: none
+  **/
   resetForm(status?: string) {
     this.submitStatus = status || 'Submit';
     this.errMsg = '';
