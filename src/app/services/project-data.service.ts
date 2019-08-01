@@ -16,11 +16,25 @@ export class ProjectDataService {
   constructor(private http: HttpClient,
     private httpErrorService: ProcessHttpErrorService) { }
 
+  /**
+   * Get project summaries
+   *
+   * @params: none
+   *
+   * @return: Observable - array of project summaries
+  **/
   getProjects(): Observable<any> {
     return this.http.get(baseURL + apiVersion + 'projects')
       .pipe(catchError(err => this.httpErrorService.handleError(err)));
   }
 
+  /**
+   * Get project details by its ID
+   *
+   * @params: id - query id for requested project
+   *
+   * @return: Observable - project detail object
+  **/
   getProjectById(id: number): Observable<any> {
     return this.http.get(baseURL + apiVersion + 'projects/' + id)
       .pipe(catchError(err => this.httpErrorService.handleError(err)));
