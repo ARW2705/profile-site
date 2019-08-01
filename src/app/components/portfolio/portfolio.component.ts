@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { baseURL } from '../../shared/base-url';
-import { apiVersion } from '../../shared/api-version';
+// import { baseURL } from '../../shared/base-url';
+// import { apiVersion } from '../../shared/api-version';
 import { ProjectData } from '../../shared/project-data';
 
 import { SAMPLE } from '../../tmp/sample-project';
@@ -32,6 +32,7 @@ export class PortfolioComponent implements OnInit {
   ngOnInit() {
     this.projectList = SAMPLE;
     this.projects = SAMPLE;
+    // TODO: change to request for projects
     // this.projectService.getProjects()
     //   .subscribe(projects => {
     //     this.projects = projects;
@@ -39,13 +40,27 @@ export class PortfolioComponent implements OnInit {
     //   }, err => this.errMsg = err);
   }
 
-  filterProjectsByTechnology(selected: string) {
+  /**
+   * Filter projects list to display by the selected technology name
+   *
+   * @params: selected - the technology name associated with projects to display
+   *
+   * @return: none
+  **/
+  filterProjectsByTechnology(selected: string): void {
     this.projects = this.projectList.filter(project => {
       return project.technology.includes(selected);
     });
   }
 
-  resetProjects() {
+  /**
+   * Clear projects filter
+   *
+   * @params: none
+   *
+   * @return: none
+  **/
+  resetProjects(): void {
     this.projects = this.projectList;
   }
 
