@@ -20,8 +20,12 @@
           <mat-card-subtitle>{{ project.category | stringArray }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content fxFlex="grow" class="project-card-content">
-          <a href="{{ project.github }}" target="blank">
-            <img class="project-card-preview-image" src="{{ url + 'images/' + project.preview.src }}" alt="{{ project.preview.alt }}">
+          <a  href="{{ project.github }}"
+              target="blank"
+              attr.aria-label="{{ project.linkHelpText }}">
+            <img  class="project-card-preview-image"
+                  src="{{ url + 'images/' + project.preview.src }}"
+                  alt="{{ project.preview.alt }}">
           </a>
           <p class="project-description">
             {{ project.description }}
@@ -32,9 +36,10 @@
               fxLayout="row"
               fxLayoutAlign="start start">
             <li class="project-tech-icon"
-              *ngFor="let tech of project.technology">
-              <a (click)="filterProjectsByTechnology(tech)"
-                 [inlineSVG]="'assets/svg/tech-icons/' + tech + '.svg'">
+                *ngFor="let tech of project.technology">
+              <a  (click)="filterProjectsByTechnology(tech)"
+                  attr.aria-label="Filter projects using {{ tech }}"
+                  [inlineSVG]="'assets/svg/tech-icons/' + tech + '.svg'">
                </a>
             </li>
           </ul>
@@ -44,8 +49,10 @@
   </div>
 
   <div fxLayoutAlign="center center" id="clear-btn-container" *ngIf="projects.length != projectList.length">
-    <button color="primary" mat-raised-button (click)="resetProjects()">
-      Clear Fitler
+    <button color="primary"
+            mat-raised-button
+            (click)="resetProjects()">
+      Clear Filter
     </button>
   </div>
 
