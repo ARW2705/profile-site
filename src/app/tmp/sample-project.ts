@@ -3,12 +3,12 @@ import { ProjectData } from '../shared/project-data';
 export const SAMPLE: ProjectData[] = [
   {
     id: 1,
-    title: 'Mundus Te',
+    title: 'Mundus Vestro',
     category: [
       'Web App'
     ],
-    github: 'https://github.com/ARW2705/mundus-te',
-    altLink: 'https://andrewanex.com/mundus-te/',
+    github: 'https://github.com/ARW2705/mundus-vestro',
+    altLink: 'https://andrewanex.com/mundus-vestro/',
     technology: [
       'html',
       'sass',
@@ -16,13 +16,17 @@ export const SAMPLE: ProjectData[] = [
       'gulp'
     ],
     description: `
-      Mundus Te (Your World) is an application giving you a quick
+      Mundus Vestro (Your World) is an application giving you a quick
       view of various information about the Earth's natural systems. Check the
       current weather and forecasts. Explore recent seismological data. Track the
       International Space Station's orbit overhead.
     `,
+    linkHelpText: `
+      Navigate to Github to view additional information for the Mundus Vestro
+      application
+    `,
     preview: {
-      src: 'mundus-te-preview.jpg',
+      src: 'world-preview.jpg',
       alt: 'View of Earth from the International Space Station'
     },
     additionalImages: []
@@ -33,7 +37,7 @@ export const SAMPLE: ProjectData[] = [
     category: [
       'Arduino'
     ],
-    github: 'https://github.com/ARW2705/Fermentation-Control',
+    github: 'https://github.com/ARW2705/fermentation-controller',
     altLink: '',
     technology: [
       'c',
@@ -46,6 +50,10 @@ export const SAMPLE: ProjectData[] = [
       temperatures by controlling the refrigerant circuit or heating element.
       Internet connectivity coming soon!
     `,
+    linkHelpText: `
+      Navigate to Github to view additional information about the Fermentation
+      Temperature Controller application
+    `,
     preview: {
       src: 'fermentation-preview.jpg',
       alt: 'Fermentation vessel and pressure gauge'
@@ -54,7 +62,7 @@ export const SAMPLE: ProjectData[] = [
   },
   {
     id: 3,
-    title: 'Automation App',
+    title: 'Home Automation App',
     category: [
       'Web App',
       'Mobile App',
@@ -73,6 +81,10 @@ export const SAMPLE: ProjectData[] = [
       thermostat, wifi connected garage door, motion activated security camera,
       and more to come!
     `,
+    linkHelpText: `
+      Navigate to Github to view additional information about the Home automation
+      Manager application
+    `,
     preview: {
       src: 'smart-home-preview.jpg',
       alt: 'Control interface with picture icons'
@@ -81,12 +93,12 @@ export const SAMPLE: ProjectData[] = [
   },
   {
     id: 4,
-    title: 'Automation Cloud',
+    title: 'Home Automation Cloud',
     category: [
       'Web Server',
       'IoT'
     ],
-    github: 'https://github.com/ARW2705/homemanagerapp',
+    github: 'https://github.com/ARW2705/homemanagercloud',
     altLink: '',
     technology: [
       'nodejs',
@@ -100,6 +112,10 @@ export const SAMPLE: ProjectData[] = [
       both HTTP requests and Socket.io messages. A MongoDB database stores home
       sensor data for analysis
     `,
+    linkHelpText: `
+      Navigate to Github to view additional information about the Home Automation
+      Manager Cloud based server
+    `,
     preview: {
       src: 'cloud-server-preview.jpg',
       alt: 'Server racks'
@@ -108,7 +124,7 @@ export const SAMPLE: ProjectData[] = [
   },
   {
     id: 5,
-    title: 'Automation Hub',
+    title: 'Home Automation Hub',
     category: [
       'Web Server',
       'IoT'
@@ -124,6 +140,10 @@ export const SAMPLE: ProjectData[] = [
     description: `
       A central control hub for the smart home. A secure way to
       route messages from IoT devices to the cloud
+    `,
+    linkHelpText: `
+      Navigate to Github to view additional information about the Home Automation
+      Manager at-home server
     `,
     preview: {
       src: 'home-hub-preview.jpg',
@@ -146,7 +166,12 @@ export const SAMPLE: ProjectData[] = [
     description: `
       Utilizing the compact Raspberry Pi Zero W, this camera system
       is capable of recording on command via web sockets or through
-      a PIR motion detector`,
+      a PIR motion detector
+    `,
+    linkHelpText: `
+      Navigate to Github to view additional information about the Home Security
+      Camera application
+    `,
     preview: {
       src: 'camera-preview.jpg',
       alt: 'Camera aperture'
