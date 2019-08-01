@@ -42,6 +42,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProjectDataService } from './services/project-data.service';
 import { EmailRequestService } from './services/email-request.service';
 import { ProcessHttpErrorService } from './services/process-http-error.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { ProcessHttpErrorService } from './services/process-http-error.service';
     FormsModule,
     InlineSVGModule.forRoot(),
     ReactiveFormsModule,
-    AngularPageVisibilityModule
+    AngularPageVisibilityModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     ProjectDataService,
